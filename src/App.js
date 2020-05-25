@@ -1,24 +1,66 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Switch from '@material-ui/core/Switch';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 function App() {
+  const [onSwitch, setOnSwitch] = useState({
+    checkOne: false,
+    checkTwo: false,
+    checkThree: false,
+  });
+
+  const handleChangeOne = () => {
+    setOnSwitch({ checkOne: true, checkTwo: true, checkThree: false });
+  };
+  const handleChangeTwo = () => {
+    setOnSwitch({ checkOne: false, checkTwo: true, checkThree: true });
+  };
+  const handleChangeThree = () => {
+    setOnSwitch({ checkOne: true, checkTwo: false, checkThree: true });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h2>Pick One</h2>
+      <FormControl component="fieldset">
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={onSwitch.checkOne}
+                onChange={handleChangeOne}
+                name="checked1"
+              />
+            }
+            label="Fast"
+          />
+          <FormControlLabel
+            control={
+              <Switch
+                checked={onSwitch.checkTwo}
+                onChange={handleChangeTwo}
+                name="checked2"
+              />
+            }
+            label="Good"
+          />
+          <FormControlLabel
+            control={
+              <Switch
+                checked={onSwitch.checkThree}
+                onChange={handleChangeThree}
+                name="checked3"
+              />
+            }
+            label="Cheap"
+          />
+        </FormGroup>
+        <FormHelperText>It's not that complicated</FormHelperText>
+      </FormControl>
     </div>
   );
 }
